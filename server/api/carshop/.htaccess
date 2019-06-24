@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /GFL_REST/server/api/carshop/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ index.php
