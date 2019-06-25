@@ -5,5 +5,6 @@
  * Date: 24.06.2019
  * Time: 23:51
  */
+include 'core/RestServer.php';
 
-echo 'OK';
+new RestServer();
