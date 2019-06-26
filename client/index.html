@@ -16,12 +16,15 @@
     $("#send").click(function(){
 
         $.ajax({
-            type: "POST",
+            type: "GET",
             dataType: "text",
-            url: "api/carshop.txt",
+            url: "api/cars/",
 
             success: function(res){
-                $("#content").text(res);
+                //var data = $.parseJSON(res);
+                //console.log(data);
+                //$("#content").text(data);
+                console.log(res);
             },
         });
     });

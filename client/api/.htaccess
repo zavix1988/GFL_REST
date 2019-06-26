@@ -1,3 +1,3 @@
 RewriteEngine On
 RewriteBase /api/
-RewriteRule (.*) http://tc.geeksforless.net/~user12/GFL_REST/server/api/carshop/$1
+RewriteRule (.*) http://localhost/GFL_REST/server/api/$1
