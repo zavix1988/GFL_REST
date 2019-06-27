@@ -1,8 +1,5 @@
 <?php
 
-namespace core;
-
-use core\DataConverter;
 
 class Rest
 {
@@ -27,22 +24,24 @@ class Rest
      */
     private function getMethod()
     {
-        list($root, $source, $folder1, $folder2, $service, $params) = explode('/', $this->url, 6);
+        //list($root, $source, $folder1, $folder2, $service, $params) = explode('/', $this->url, 6);
+        list($root, $source, $folder0, $folder1, $folder2, $class, $service, $params) = explode('/', $this->url, 8);
+
+
 
         $format = $this->getFormat($params);
 
         switch($this->method)
         {
             case 'GET':
-                $params = $_GET;
-                $result = $this->setMethod('get'.ucfirst($service), $params);
+                $result = $this->setMethod('get'.ucfirst($service),  explode('/', $params));
                 break;
             case 'DELETE':
-                $result = $this->setMethod('delete'.ucfirst($service), $params);
+                $result = $this->setMethod('delete'.ucfirst($service),  explode('/', $params));
                 break;
             case 'POST':
                 $params = $_POST;
-                $result = $this->setMethod('post'.ucfirst($service), $params);
+                $result = $this->setMethod('post'.ucfirst($service),  explode('/', $params));
                 break;
             case 'PUT':
                 $params = [];
@@ -56,12 +55,12 @@ class Rest
                         $params[urldecode($item[0])] = urldecode($item[1]);
                     }
                 }
-                $result = $this->setMethod('put'.ucfirst($service), $params);
+                $result = $this->setMethod('put'.ucfirst($service),  explode('/', $params));
                 break;
             default:
                 return false;
         }
-        return DataConverter::handle($result, $format);
+        return DataViewer::handle($result, $format);
     }
 
     private function setMethod($method, $param=false)

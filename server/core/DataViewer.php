@@ -6,10 +6,9 @@
  * Time: 9:38
  */
 
-namespace core;
 
 
-class DataConverter
+class DataViewer
 {
     public static function handle($data, $format=false)
     {
@@ -33,7 +32,7 @@ class DataConverter
         }
     }
 
-    private function toText($data)
+    private static function toText($data)
     {
         $string = '';
 
@@ -49,14 +48,14 @@ class DataConverter
         return $string;
     }
 
-    private function toJson($data)
+    private static function toJson($data)
     {
         return json_encode($data);
     }
 
-    private function toXML($data)
+    private static function toXML($data)
     {
-        $xml = new \SimpleXMLElement('<data/>');
+        $xml = new SimpleXMLElement('<data/>');
 
         if (is_array($data))
         {
@@ -81,7 +80,7 @@ class DataConverter
 
     }
 
-    private function toHTML($data)
+    private static function toHTML($data)
     {
         if(is_array($data)){
             $string = "<div class='data'>\n";

@@ -9,10 +9,8 @@
 include '../../config.php';
 include '../../core/Db.php';
 include '../../core/Rest.php';
-include '../../core/DataConverter.php';
+include '../../core/DataViewer.php';
 
-use core\Db;
-use core\Rest;
 
 class Users
 {
@@ -35,7 +33,7 @@ class Users
 
     public function putUsers($params=false)
     {
-        if(isset($params['method'])){
+        if($params['method'] == 'signUp'){
             return $this->signUp($params);
         }
     }
