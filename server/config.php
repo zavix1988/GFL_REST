@@ -13,3 +13,9 @@ define('DB_USER', 'user12');
 define('DB_PASSWORD', 'user12');
 define('DB_NAME', 'user12');
 define('DB_DEFAULT_CHARSET', 'utf8');
+
+//DataConverter config
+define('TO_JSON', '.json');
+define('TO_TEXT', '.txt');
+define('TO_HTML', '.html');
+define('TO_XML', '.xml');

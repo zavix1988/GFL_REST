@@ -9,6 +9,7 @@
 include '../../config.php';
 include '../../core/Db.php';
 include '../../core/Rest.php';
+include '../../core/DataConverter.php';
 
 use core\Db;
 use core\Rest;
@@ -20,64 +21,87 @@ class Cars
     public function __construct()
     {
         $this->pdo = Db::instance();
-        $this->allCars = [];
     }
 
-    public function getCars()
+    public function getCars($params=false)
+    {
+        if(isset($params['id'])){
+            $id = (int)$params['id'];
+            return $this->getCarById($id);
+        }
+        else if(isset($params['filter'])){
+            return $this->getCarsByParam(2008, 'Skoda');
+        }
+        return $this->getAllCars();
+    }
+
+    public function postCars($params=false)
+    {
+    }
+
+    public function putCars($params=false)
+    {
+    }
+
+    public function deleteCars($params=false)
+    {
+
+    }
+
+
+    private function getAllCars()
     {
         $sql = "SELECT ashop_cars.id, ashop_brands.name AS brand, ashop_cars.model FROM ashop_cars INNER JOIN ashop_brands ON ashop_cars.brand_id=ashop_brands.id";
 
         return $this->pdo->query($sql);
     }
 
-    public function getCarById($id)
+    private function getCarById($id)
     {
         $sql = "SELECT ashop_cars.id, ashop_brands.name  AS brand, ashop_cars.model, ashop_cars.year, ashop_cars.displacement, ashop_cars.color, ashop_cars.max_speed, ashop_cars.price FROM ashop_cars INNER JOIN ashop_brands ON ashop_cars.brand_id=ashop_brands.id WHERE ashop_cars.id = ? LIMIT 1";
         $result = $this->pdo->query($sql, [$id]);
         return $result[0];
     }
 
-    /*public function getCarsByParam($in)
+    private function getCarsByParam($year, $brand=false, $model=false, $color=false, $max_speed=false, $minDisplacement=false, $maxDisplacement=false, $minPrice=false, $maxPrice=false)
     {
         $sql = "SELECT ashop_cars.id, ashop_brands.name  AS brand, ashop_cars.model FROM ashop_cars INNER JOIN ashop_brands ON ashop_cars.brand_id=ashop_brands.id WHERE ashop_cars.year = ? ";
-        $params[] = $in->year;
+        $params[] = $year;
 
-        if ($in->brand != ''){
+        if ($brand){
             $sql .= "AND ashop_brands.name = ? ";
-            $params[] = $in->brand;
+            $params[] = $brand;
         }
-        if ($in->model != ''){
+        if ($model){
             $sql .= "AND ashop_cars.model = ? ";
-            $params[] = $in->model;
+            $params[] = $model;
         }
-        if ($in->color != ''){
+        if ($color){
             $sql .= "AND ashop_cars.color = ? ";
-            $params[] = $in->color;
+            $params[] = $color;
         }
-        if ($in->max_speed != 0) {
+        if ($max_speed) {
             $sql .= "AND ashop_cars.max_speed <= ? ";
-            $params[] = $in->max_speed;
+            $params[] = $max_speed;
         }
-        if ($in->minDisplacement != 0){
+        if ($minDisplacement){
             $sql .= "AND ashop_cars.displacement >= ? ";
-            $params[] = $in->minDisplacement;
+            $params[] = $minDisplacement;
         }
-        if ($in->maxDisplacement != 0){
+        if ($maxDisplacement){
             $sql .= "AND ashop_cars.displacement <= ? ";
-            $params[] = $in->maxDisplacement;
+            $params[] = $maxDisplacement;
         }
-        if ($in->minPrice != 0){
+        if ($minPrice){
             $sql .= "AND ashop_cars.price >= ? ";
-            $params[] = $in->minPrice;
+            $params[] = $minPrice;
         }
-        if ($in->maxPrice != 0){
+        if ($maxPrice){
             $sql .= "AND ashop_cars.price <= ? ";
-            $params[] = $in->maxPrice;
+            $params[] = $maxPrice;
         }
         return $this->pdo->query($sql, $params);
-    }*/
-
-
+    }
 }
 
 $carService = new Cars();

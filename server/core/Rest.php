@@ -2,6 +2,8 @@
 
 namespace core;
 
+use core\DataConverter;
+
 class Rest
 {
 
@@ -16,44 +18,72 @@ class Rest
         $this->method = $_SERVER['REQUEST_METHOD'];
         if(is_object($service)){
             $this->service = $service;
-            echo $this->getMethod();
+            $this->getMethod();
         }
     }
 
     /**
      * @return mixed
      */
-    public function getMethod()
+    private function getMethod()
     {
-        list($root, $source, $folder1, $folder2, $service, $params) = explode('/', $this->url, 6); //Server, api, cars, params
+        list($root, $source, $folder1, $folder2, $service, $params) = explode('/', $this->url, 6);
 
+        $format = $this->getFormat($params);
 
         switch($this->method)
         {
             case 'GET':
-                $result = $this->setMethod('get'.ucfirst($service), explode('/', $params));
+                $params = $_GET;
+                $result = $this->setMethod('get'.ucfirst($service), $params);
                 break;
             case 'DELETE':
-                $result = $this->setMethod('delete'.ucfirst($service), explode('/', $params));
+                $result = $this->setMethod('delete'.ucfirst($service), $params);
                 break;
             case 'POST':
-                $result = $this->setMethod('post'.ucfirst($service), explode('/', $params));
+                $params = $_POST;
+                $result = $this->setMethod('post'.ucfirst($service), $params);
                 break;
             case 'PUT':
-                $result = $this->setMethod('put'.ucfirst($service), explode('/', $params));
+                $params = [];
+                $putdata = file_get_contents('php://input');
+                $inputArray = explode('&', $putdata);
+                foreach($inputArray as $pair)
+                {
+                    $item = explode('=', $pair);
+                    if(count($item) == 2)
+                    {
+                        $params[urldecode($item[0])] = urldecode($item[1]);
+                    }
+                }
+                $result = $this->setMethod('put'.ucfirst($service), $params);
                 break;
             default:
                 return false;
         }
-        return json_encode($result);
+        return DataConverter::handle($result, $format);
     }
 
-    function setMethod($method, $param=false)
+    private function setMethod($method, $param=false)
     {
         if ( method_exists($this->service, $method) )
         {
             return call_user_func([$this->service, $method], $param);
         }
         return false;
+    }
+
+    private function getFormat($params)
+    {
+        if(strpos($params, TO_TEXT) !== false){
+            return TO_TEXT;
+        }
+        if(strpos($params, TO_HTML) !== false){
+            return TO_HTML;
+        }
+        if(strpos($params, TO_XML) !== false){
+            return TO_XML;
+        }
+        return TO_JSON;
     }
 }
