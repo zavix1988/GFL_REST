@@ -11,7 +11,7 @@ class Rest
 
     public function __construct($service)
     {
-        $this->url = $_SERVER['REQUEST_URI'];
+        $this->url = substr($_SERVER['REQUEST_URI'], strpos($_SERVER['REQUEST_URI'], 'api'));
         $this->method = $_SERVER['REQUEST_METHOD'];
         if(is_object($service)){
             $this->service = $service;
@@ -24,9 +24,7 @@ class Rest
      */
     private function getMethod()
     {
-        //list($root, $source, $folder1, $folder2, $service, $params) = explode('/', $this->url, 6);
-        list($root, $source, $folder0, $folder1, $folder2, $class, $service, $params) = explode('/', $this->url, 8);
-
+        list($api, $class, $service, $params) = explode('/', $this->url, 4);
 
 
         $format = $this->getFormat($params);

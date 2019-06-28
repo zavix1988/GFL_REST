@@ -10,6 +10,7 @@ include '../../config.php';
 include '../../core/Db.php';
 include '../../core/Rest.php';
 include '../../core/DataViewer.php';
+include '../../core/functions.php';
 
 class Cars
 {
@@ -20,7 +21,7 @@ class Cars
         $this->pdo = Db::instance();
     }
 
-    public function getCars()
+    public function getAllcars()
     {
         $sql = "SELECT ashop_cars.id, ashop_brands.name AS brand, ashop_cars.model FROM ashop_cars INNER JOIN ashop_brands ON ashop_cars.brand_id=ashop_brands.id";
 
@@ -37,15 +38,15 @@ class Cars
 
     public function getFilter()
     {
-        $year = $_GET['year'];
-        $brand = $_GET['brand'];
-        $model = $_GET['model'];
-        $color = $_GET['color'];
-        $max_speed = $_GET['max_speed'];
-        $minDisplacement = $_GET['minDisplacement'];
-        $maxDisplacement = $_GET['maxDisplacement'];
-        $minPrice = $_GET['minPrice'];
-        $maxPrice = $_GET['maxPrice'];
+        $year = (int)$_GET['year'];
+        $brand = empty($_GET['brand']) ? false : cleanPostString($_GET['brand']);
+        $model = empty($_GET['model']) ? false : cleanPostString($_GET['model']);
+        $color = empty($_GET['color']) ? false : cleanPostString($_GET['color']);
+        $maxSpeed = empty($_GET['max_speed']) ? false : (int)$_GET['max_speed'];
+        $minDisplacement = empty($_GET['min_displacement']) ? false : (float)$_GET['min_displacement'];
+        $maxDisplacement = empty($_GET['max_displacement']) ? false : (float)$_GET['max_displacement'];
+        $minPrice = empty($_GET['min_price']) ? false : (int)$_GET['min_price'];
+        $maxPrice = empty($_GET['max_price']) ? false : (int)$_GET['max_price'];
 
         $sql = "SELECT ashop_cars.id, ashop_brands.name  AS brand, ashop_cars.model FROM ashop_cars INNER JOIN ashop_brands ON ashop_cars.brand_id=ashop_brands.id WHERE ashop_cars.year = ? ";
         $params[] = $year;
@@ -62,9 +63,9 @@ class Cars
             $sql .= "AND ashop_cars.color = ? ";
             $params[] = $color;
         }
-        if ($max_speed) {
+        if ($maxSpeed) {
             $sql .= "AND ashop_cars.max_speed <= ? ";
-            $params[] = $max_speed;
+            $params[] = $maxSpeed;
         }
         if ($minDisplacement){
             $sql .= "AND ashop_cars.displacement >= ? ";

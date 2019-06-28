@@ -2,7 +2,9 @@
     Allow from all
 </Limit>
 
+
+
 RewriteEngine On
 RewriteBase /api/
-#RewriteRule (.*) http://localhost/GFL_REST/server/api/$1
-RewriteRule (.*) http://tc.geeksforless.net/~user12/GFL_REST/server/api/$1
+RewriteRule (.*) http://localhost/GFL_REST/server/api/$1
+#RewriteRule (.*) http://tc.geeksforless.net/~user12/GFL_REST/server/api/$1
