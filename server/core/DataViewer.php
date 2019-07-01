@@ -12,6 +12,7 @@ class DataViewer
 {
     public static function handle($data, $format=false)
     {
+        header('Access-Control-Allow-Origin: *');  
         if (!is_array($data)){
             http_response_code(404);
             echo "PAGE NOT FOUND";

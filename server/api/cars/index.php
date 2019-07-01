@@ -30,6 +30,7 @@ class Cars
 
     public function getCar($id)
     {
+        // var_dump('hyu'); die;
         $id = $id[0];
         $sql = "SELECT ashop_cars.id, ashop_brands.name  AS brand, ashop_cars.model, ashop_cars.year, ashop_cars.displacement, ashop_cars.color, ashop_cars.max_speed, ashop_cars.price FROM ashop_cars INNER JOIN ashop_brands ON ashop_cars.brand_id=ashop_brands.id WHERE ashop_cars.id = ? LIMIT 1";
         $result = $this->pdo->query($sql, [$id]);
