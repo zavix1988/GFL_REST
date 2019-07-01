@@ -24,7 +24,7 @@ class Rest
      */
     private function getMethod()
     {
-        list($api, $class, $service, $params) = explode('/', $this->url, 4);
+        list($api, $service, $method, $params) = explode('/', $this->url, 4);
 
 
         $format = $this->getFormat($params);
@@ -32,14 +32,14 @@ class Rest
         switch($this->method)
         {
             case 'GET':
-                $result = $this->setMethod('get'.ucfirst($service),  explode('/', $params));
+                $result = $this->setMethod('get'.ucfirst($method),  explode('/', $params));
                 break;
             case 'DELETE':
-                $result = $this->setMethod('delete'.ucfirst($service),  explode('/', $params));
+                $result = $this->setMethod('delete'.ucfirst($method), $params);
                 break;
             case 'POST':
                 $params = $_POST;
-                $result = $this->setMethod('post'.ucfirst($service),  explode('/', $params));
+                $result = $this->setMethod('post'.ucfirst($method), $params);
                 break;
             case 'PUT':
                 $params = [];
@@ -53,7 +53,7 @@ class Rest
                         $params[urldecode($item[0])] = urldecode($item[1]);
                     }
                 }
-                $result = $this->setMethod('put'.ucfirst($service),  explode('/', $params));
+                $result = $this->setMethod('put'.ucfirst($method), $params);
                 break;
             default:
                 return false;

@@ -2,7 +2,7 @@
     Allow from all
 </Limit>
 
-
+Header set Access-Control-Allow-Origin "*"
 RewriteEngine On
 RewriteBase /GFL_REST/server/api/cars/
 #RewriteBase /~user12/GFL_REST/server/api/cars/

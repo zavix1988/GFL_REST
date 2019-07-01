@@ -1,19 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Cars from '@/components/Cars'
 import PageCar from '@/components/PageCar'
+import Register from '@/components/Register'
+import Login from '@/components/Login'
+import Logout from '@/components/Logout'
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-        path: '/cars',
+        path: '/',
         name: 'Cars',
         component: Cars
     },
@@ -21,6 +19,21 @@ export default new Router({
         path: '/car/:id',
         name: 'PageCar',
         component: PageCar
+    },
+    {
+        path: '/signUp',
+        name: 'Register',
+        component: Register
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
+    },
+    {
+        path: '/logout',
+        name: 'Logout',
+        component: Logout
     }
   ]
 })

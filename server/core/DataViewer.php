@@ -14,6 +14,7 @@ class DataViewer
     {
         if (!is_array($data)){
             http_response_code(404);
+            echo "PAGE NOT FOUND";
         }else{
             http_response_code(200);
             switch ($format)

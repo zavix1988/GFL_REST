@@ -1,6 +1,6 @@
 <template>
     <div id="cars">
-
+        <car-filter></car-filter>
     <table>
         <tr>
             <th>num</th>
@@ -17,6 +17,8 @@
 
 <script>
 import Car from './Car';
+import CarFilter from './CarFilter'
+import EventBus from './EventBus';
 
 export default {
     name: "Cars",
@@ -30,7 +32,7 @@ export default {
     },
     created() {
         axios
-            .get('http://localhost/GFL_REST/client/api/cars/allcars')
+            .get('http://gflpractice/GFL_REST/client/api/cars/allcars')
             .then(response => (this.cars = response.data)).catch(error => console.log(error));
     }
 }

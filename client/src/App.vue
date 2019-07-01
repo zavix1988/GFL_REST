@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <router-link to="/cars">Cars</router-link>
+    <router-link to="/">Cars</router-link>
+    <router-link to="/signup">SignUp</router-link>
+    <router-link to="/LogIn">Login</router-link>
+    <router-link to="/LogOut">LogOut</router-link>
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+    name: 'App',
+
 }
 </script>
 

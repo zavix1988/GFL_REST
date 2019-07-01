@@ -1,8 +1,9 @@
 <template>
     <tr>
-        <td @click="openCar()">{{id}}</td>
+        <td>{{id}}</td>
         <td>{{brand}}</td>
         <td>{{model}}</td>
+        <td><button @click="openCar()">Get</button></td>
     </tr>
 </template>
 

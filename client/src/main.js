@@ -5,8 +5,10 @@ import './plugins/axios'
 import App from './App'
 import router from './router'
 import Car from './components/Car'
+import CarFilter from './components/CarFilter'
 
 Vue.component('car', Car);
+Vue.component('car-filter', CarFilter);
 
 Vue.config.productionTip = false
 
