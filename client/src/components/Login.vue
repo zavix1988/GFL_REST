@@ -1,5 +1,6 @@
 <template>
-    <div id="login">
+    <div id="login_form">
+        <div class="error" v-show="error">Ошибка авторизации</div>
         <form @submit.prevent="signin()">
             <div class="form-module">
                 <label for="login">Логин</label>
@@ -10,7 +11,7 @@
                 <input v-model="password" type="text" id="password" name="password" required>
             </div>
             <div class="form-module">
-                <button type="submit">Register</button>
+                <button type="submit">Login</button>
             </div>
         </form>
     </div>
@@ -23,16 +24,27 @@
             return{
                 login: null,
                 password: null,
-                token: null
+                token: null,
+                loginResponse: null,
+                error: false
             }
         },
         methods: {
             signin(){
                 axios
                     .put(
-                        'http://gflpractice/GFL_REST/server/api/users/login/', 'login='+this.login+'&password='+this.password)
-                    .then(response => (localStorage.setItem('token', response.data.token)));
-            }
+                        'http://localhost/GFL_REST/server/api/users/login/', 'login='+this.login+'&password='+this.password)
+                    .then(response => (
+                        localStorage.setItem('token', response.data.token)
+                    ));
+                setTimeout(() => {
+                    if(localStorage.token !== "false"){
+                        this.$router.push({name: 'Cars'})
+                    }else{
+                        this.error = true;
+                    }
+                }, 500)
+            },
         }
     }
 </script>

@@ -40,7 +40,7 @@ class Users
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $sql = "INSERT INTO ashop_users (login, password, first_name, last_name, email) VALUES (?, ?, ?, ?, ?)";
                 if ($this->pdo->execute($sql, [$login, $password, $first_name, $last_name, $email])){
-                    return ['result'=>'true'];
+                    return ['result'=>true];
                 }
             }
         }
@@ -63,7 +63,7 @@ class Users
                 return ['token' => $token];
             }
         }
-        return ['result' => 'false'];
+        return ['token' => false];
 
     }
 

@@ -14,7 +14,7 @@
         },
         mounted(){
             if(localStorage.token){
-                localStorage.removeItem('token');
+                localStorage.token = false;
                 this.message = 'OK';
             }
         }

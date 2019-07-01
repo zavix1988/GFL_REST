@@ -50,13 +50,15 @@
             register(){
                 axios
                     .post(
-                        'http://gflpractice/GFL_REST/server/api/users/signup/', 'first_name='+this.first_name
+                        'http://localhost/GFL_REST/server/api/users/signup/', 'first_name='+this.first_name
                                                                                 +'&last_name='+this.last_name
                                                                                 +'&login='+this.login
                                                                                 +'&email='+this.email
                                                                                 +'&password='+this.password
                                                                                 +'&retry='+this.retry)
-                    .then(response => (console.log(response.data)));
+                    .then(response => (
+                        this.$router.push({name: 'Login'})
+                    ));
             }
         }
     }

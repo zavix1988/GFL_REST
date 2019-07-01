@@ -11,7 +11,14 @@
 <script>
 export default {
     name: 'App',
+    data(){
+        return {
+            login: false
+        }
+    },
+    computed: {
 
+    }
 }
 </script>
 

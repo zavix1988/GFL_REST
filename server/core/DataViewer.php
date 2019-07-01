@@ -15,27 +15,33 @@ class DataViewer
         if (!is_array($data)){
             http_response_code(404);
             echo "PAGE NOT FOUND";
-        }else{
-            http_response_code(200);
-            switch ($format)
-            {
-                case TO_TEXT :
-                    header('Content-type: text/plain');
-                    echo self::toText($data);
-                    break;
-                case TO_XML :
-                    header('Content-type: application/xml');
-                    echo self::toXML($data);
-                    break;
-                case TO_HTML :
-                    header('Content-type: text/html');
-                    echo self::toHTML($data);
-                    break;
-                default:
-                    header('Content-Type: application/json');
-                    echo self::toJson($data);
-            }
         }
+        else if($data['user'] == 'unauthorized')
+        {
+            http_response_code(401);
+        }
+        else
+        {
+        http_response_code(200);
+        switch ($format)
+        {
+            case TO_TEXT :
+                header('Content-type: text/plain');
+                echo self::toText($data);
+                break;
+            case TO_XML :
+                header('Content-type: application/xml');
+                echo self::toXML($data);
+                break;
+            case TO_HTML :
+                header('Content-type: text/html');
+                echo self::toHTML($data);
+                break;
+            default:
+                header('Content-Type: application/json');
+                echo self::toJson($data);
+        }
+    }
 
 
     }

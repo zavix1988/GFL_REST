@@ -3,7 +3,8 @@
 </Limit>
 
 RewriteEngine On
-RewriteBase /GFL_REST/server/orders/
+RewriteBase /GFL_REST/server/api/orders/
+#RewriteBase /~user12/GFL_REST/server/api/orders/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ index.php

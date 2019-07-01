@@ -5,6 +5,7 @@ import PageCar from '@/components/PageCar'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
+import Orders from '@/components/Orders'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
         path: '/logout',
         name: 'Logout',
         component: Logout
+    },
+    {
+        path: '/orders',
+        name: 'Orders',
+        component: Orders
     }
   ]
 })

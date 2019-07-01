@@ -23,12 +23,12 @@
                 <input v-model="max_speed" type="text" class="form-control" id="max_speed" name="max_speed" placeholder="Максимальная скорость">
             </div>
             <div class="form-group">
-                <label for="min_displacement">Объем двигуна от</label>
-                <input v-model="min_displacement" type="text" class="form-control" id="min_displacement" name="min_displacement" placeholder="Объем двигуна от">
+                <label for="min_displacement">Объем пихла от</label>
+                <input v-model="min_displacement" type="text" class="form-control" id="min_displacement" name="min_displacement" placeholder="Объем пихла от">
             </div>
             <div class="form-group">
-                <label for="max_displacement">Объем двигуна до</label>
-                <input v-model="max_displacement" type="text" class="form-control" id="max_displacement" name="max_displacement" placeholder="Объем двигуна до">
+                <label for="max_displacement">Объем пихла до</label>
+                <input v-model="max_displacement" type="text" class="form-control" id="max_displacement" name="max_displacement" placeholder="Объем пихла до">
             </div>
             <div class="form-group">
                 <label for="min_price">Стоимость от</label>
@@ -44,27 +44,31 @@
 </template>
 
 <script>
-    import EventBus from './EventBus';
+    import EventBus from '@/EventBus';
+
 
     export default {
         name: "car-filter",
         data(){
             return{
-                year: null,
-                brand: null,
-                model: null,
-                color: null,
-                max_speed: null,
-                min_displacement: null,
-                max_displacement: null,
-                min_price: null,
-                max_price: null
+                year: '',
+                brand: '',
+                model: '',
+                color: '',
+                max_speed: '',
+                min_displacement: '',
+                max_displacement: '',
+                min_price: '',
+                max_price: '',
+                data: null
             }
         },
+
         methods: {
             getFilter() {
-                EventBus.$emit()
-                console.log(this.year);
+                axios
+                    .get('http://localhost/GFL_REST/server/api/cars/filter/?year='+this.year+'&brand='+this.brand+'&model='+this.model+'&color='+this.color+'&max_speed='+this.max_speed+'&min_displacement='+this.min_displacement+'&max_displacement='+this.max_displacement+'&min_price='+this.min_price+'&max_price='+this.max_price)
+                    .then(response => (EventBus.$emit('carFilter', response.data )));
             }
         }
     }
