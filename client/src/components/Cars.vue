@@ -35,7 +35,7 @@ export default {
     },
     created() {
         axios
-            .get('http://localhost/GFL_REST/client/api/cars/allcars')
+            .get('api/cars/allcars')
             .then(response => (this.cars = response.data)).catch(error => console.log(error));
         EventBus.$on('carFilter', this.getFilter);
     }

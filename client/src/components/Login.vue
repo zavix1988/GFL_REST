@@ -33,13 +33,14 @@
             signin(){
                 axios
                     .put(
-                        'http://localhost/GFL_REST/server/api/users/login/', 'login='+this.login+'&password='+this.password)
+                        'api/users/login/', 'login='+this.login+'&password='+this.password)
                     .then(response => (
                         localStorage.setItem('token', response.data.token)
-                    ));
+                    ))
                 setTimeout(() => {
                     if(localStorage.token !== "false"){
                         this.$router.push({name: 'Cars'})
+                        document.location.reload()
                     }else{
                         this.error = true;
                     }

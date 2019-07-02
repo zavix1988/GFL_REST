@@ -50,7 +50,7 @@
         created() {
             this.token = localStorage.token;
             axios
-                .get('http://localhost/GFL_REST/client/api/cars/car/'+this.$route.params.id)
+                .get('api/cars/car/'+this.$route.params.id)
                 .then(response => (this.car = response.data)).catch(error => console.log(error));
         },
         methods: {

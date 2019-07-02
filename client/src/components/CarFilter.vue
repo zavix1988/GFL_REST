@@ -67,7 +67,7 @@
         methods: {
             getFilter() {
                 axios
-                    .get('http://localhost/GFL_REST/server/api/cars/filter/?year='+this.year+'&brand='+this.brand+'&model='+this.model+'&color='+this.color+'&max_speed='+this.max_speed+'&min_displacement='+this.min_displacement+'&max_displacement='+this.max_displacement+'&min_price='+this.min_price+'&max_price='+this.max_price)
+                    .get('api/cars/filter/?year='+this.year+'&brand='+this.brand+'&model='+this.model+'&color='+this.color+'&max_speed='+this.max_speed+'&min_displacement='+this.min_displacement+'&max_displacement='+this.max_displacement+'&min_price='+this.min_price+'&max_price='+this.max_price)
                     .then(response => (EventBus.$emit('carFilter', response.data )));
             }
         }

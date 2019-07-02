@@ -55,7 +55,7 @@
         methods: {
             buy(){
                 axios
-                    .put('http://localhost/GFL_REST/server/api/orders/buycar', 'token='+this.token+'&id='+this.store.car.id+'&payment='+this.payment)
+                    .put('api/orders/buycar', 'token='+this.token+'&id='+this.store.car.id+'&payment='+this.payment)
                     .then(response => (
                         this.store.car = {},
                         this.result = 'Success'

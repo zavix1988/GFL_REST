@@ -13,9 +13,10 @@
           }
         },
         mounted(){
-            if(localStorage.token){
+            if(localStorage.token !== "false"){
                 localStorage.token = false;
                 this.message = 'OK';
+                setTimeout(document.location.reload(), 1000)
             }
         }
     }

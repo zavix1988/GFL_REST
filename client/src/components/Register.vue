@@ -49,8 +49,8 @@
         methods: {
             register(){
                 axios
-                    .post(
-                        'http://localhost/GFL_REST/server/api/users/signup/', 'first_name='+this.first_name
+                    .put(
+                        'api/users/signup/', 'first_name='+this.first_name
                                                                                 +'&last_name='+this.last_name
                                                                                 +'&login='+this.login
                                                                                 +'&email='+this.email

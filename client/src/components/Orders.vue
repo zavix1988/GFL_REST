@@ -28,7 +28,7 @@
         mounted(){
             this.checkAuth();
             if(this.authorized){
-                axios.get('http://localhost/GFL_REST/server/api/orders/AllOrders/token/'+this.token)
+                axios.get('api/orders/AllOrders/token/'+this.token)
                     .then(response => (
                         this.orders = response.data
                     ));
