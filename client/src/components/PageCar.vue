@@ -22,12 +22,14 @@
                 <td>Цена</td>
                 <td>{{ car.price }}</td>
             </tr>
-            <tr><td colspan="2"><button @click="buy">Купить</button></td></tr>
+            <tr><td colspan="2"><button @click="toBasket">В корзину</button></td></tr>
         </table>
     </div>
 </template>
 
 <script>
+    import Store from '@/Store';
+
     export default {
         name: "PageCar",
         data() {
@@ -39,9 +41,10 @@
                     max_speed: null,
                     displacement: null,
                     price: null,
-                    token: 'false'
+                    token: 'false',
 
                 },
+                store: Store
             };
         },
         created() {
@@ -51,18 +54,12 @@
                 .then(response => (this.car = response.data)).catch(error => console.log(error));
         },
         methods: {
-            buy(){
-                    axios
-                        .put('http://localhost/GFL_REST/server/api/orders/buycar', 'token='+this.token+'&id='+this.car.id)
-                        .then(response => (console.log(response.data))).catch(error => (this.chechAuth(error.response.status)
-                    ));
-                },
-            chechAuth(code){
-                if(code == '401'){
-                    this.$router.push({name: 'Login'})
+            toBasket(){
+                    this.store.car = this.car;
+                    this.$router.push({name: 'BuyCar'});
                 }
             }
-        }
+
     }
 </script>
 

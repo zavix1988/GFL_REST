@@ -1,17 +1,17 @@
 <template>
-    <div id="cars">
+    <div id="cars" class="clearfix">
         <car-filter></car-filter>
-    <table id="result">
-        <tr>
-            <th>num</th>
-            <th>brand</th>
-            <th>model</th>
-        </tr>
-        <car v-for="(car, key) in cars"
-             :car="car"
-             :key="key"
-        ></car>
-    </table>
+        <table class="cars-result">
+            <tr>
+                <th>num</th>
+                <th>brand</th>
+                <th>model</th>
+            </tr>
+            <car v-for="(car, key) in cars"
+                 :car="car"
+                 :key="key"
+            ></car>
+        </table>
     </div>
 </template>
 
@@ -43,7 +43,13 @@ export default {
 </script>
 
 <style scoped>
-    #result{
-        position: absolute;
-    }
+
+.cars-result{
+    margin-left: 500px;
+}
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
 </style>

@@ -44,11 +44,12 @@ class Orders
     public function putBuyCar($params)
     {
         $token = $params['token'];
+        $payment = $params['payment'];
         $userId = $this->getUserID($token);
         if($userId)
         {
-            $sql = 'INSERT INTO ashop_rorders (user_id, car_id, time) VALUES (?, ?, ?)';
-            if($this->pdo->execute($sql, [$userId, $params['id'], time()])){
+            $sql = 'INSERT INTO ashop_rorders (user_id, car_id, payment,time) VALUES (?, ?, ?, ?)';
+            if($this->pdo->execute($sql, [$userId, $params['id'], $payment, time()])){
                 return ['result' => true];
             }
             return ['result' => false];

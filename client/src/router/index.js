@@ -6,6 +6,7 @@ import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
 import Orders from '@/components/Orders'
+import BuyCar from '@/components/BuyCar'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
         path: '/orders',
         name: 'Orders',
         component: Orders
+    },
+    {
+        path: '/buycar',
+        name: 'BuyCar',
+        component: BuyCar
     }
   ]
 })

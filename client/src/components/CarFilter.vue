@@ -75,5 +75,13 @@
 </script>
 
 <style scoped>
-
+.form-group{
+    margin-bottom: 10px;
+}
+.form-control{
+    float: right;
+}
+#car-filter{
+    width: 400px;
+}
 </style>

@@ -15,15 +15,15 @@
             </div>
             <div class="form-module">
                 <label for="email">Почта</label>
-                <input v-model="email" type="text" id="email" name="email" required>
+                <input v-model="email" type="email" id="email" name="email" required>
             </div>
             <div class="form-module">
                 <label for="password">Пароль</label>
-                <input v-model="password" type="text" id="password" name="password" required>
+                <input v-model="password" type="password" id="password" name="password" required>
             </div>
             <div class="form-module">
                 <label for="retry">Подтверждение</label>
-                <input v-model="retry" type="text" id="retry" name="retry" required>
+                <input v-model="retry" type="password" id="retry" name="retry" required>
             </div>
             <div class="form-module">
                 <button type="submit">Register</button>

@@ -6,9 +6,11 @@ import App from './App'
 import router from './router'
 import Car from './components/Car'
 import CarFilter from './components/CarFilter'
+import Order from './components/Order'
 
 Vue.component('car', Car);
 Vue.component('car-filter', CarFilter);
+Vue.component('order', Order);
 
 Vue.config.productionTip = false
 

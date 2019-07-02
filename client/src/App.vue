@@ -1,9 +1,16 @@
 <template>
   <div id="app">
-    <router-link to="/">Cars</router-link>
-    <router-link to="/signup">SignUp</router-link>
-    <router-link to="/LogIn">Login</router-link>
-    <router-link to="/LogOut">LogOut</router-link>
+    <div id="nav">
+      <router-link to="/">Cars</router-link>
+      <div v-if="authorized" id="authorized">
+        <router-link to="/Orders">Orders</router-link>
+        <router-link to="/LogOut">LogOut</router-link>
+      </div>
+      <div v-else id="unauthorized">
+        <router-link to="/signup">SignUp</router-link>
+        <router-link to="/LogIn">Login</router-link>
+      </div>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -13,10 +20,19 @@ export default {
     name: 'App',
     data(){
         return {
-            login: false
+          auth: false
         }
     },
     computed: {
+        authorized: function(){
+            if(localStorage.token && localStorage.token !== "false"){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    },
+    methods:{
 
     }
 }
@@ -27,8 +43,10 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+#nav{
+  text-align: center;
 }
 </style>
